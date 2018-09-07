@@ -14,3 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('index',['as'=>'trangchu', 'uses'=>'pagecontroller@index']);
+
+Route::get('dangnhap',[
+	'as'=>'login',
+	'uses'=>'userscontroller@login',
+]);
+Route::post('dangnhap',[
+	'as'=>'login',
+	'uses'=>'userscontroller@login',
+]);
+Route::get('dangki',[
+	'as'=>'signin',
+	'uses'=>'userscontroller@signin',
+]);
+Route::post('dangki',[
+	'as'=>'signin',
+	'uses'=>'userscontroller@signin',
+]);
