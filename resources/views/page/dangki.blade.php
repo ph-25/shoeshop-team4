@@ -20,27 +20,31 @@
 		<div class="container">
 
 			<form action="{{route('signin')}}" method="POST" role="form">
-			
+			<input type="hidden" name="_token" value="{{csrf_token()}}">
+				@if(count($errors)>0)	
+					<div class="alert alert-danger">
+						@foreach($errors->all() as $errors)
+							{{$errors}}
+						@endforeach	
+					</div>
+				@endif
+				
+				@if(Session::has('thanhcong'))
+					<div class = "alert alert-success">
+						{{Session::get('thanhcong') }}
+					</div>						
+				@endif
+
 				<div class="col-md-6">
-					<legend class="text-center">Đăng Kí</legend>
- 
-			    <div class="row"> 
-				     <div class=" col-md-6">
-				     	 <input class="form-control" name="firstname" placeholder="Họ" required="" autofocus="" type="text"> 
-				     </div> 
-				     <div class="col-md-6">
-				     	 <input class="form-control" name="lastname" placeholder="Tên" required="" type="text"> 
-			     	 </div> 
-			    </div>
-				     	<input class="form-control" name="youremail" placeholder="Email" type="email"> 
+					
+								<legend class="text-center">Đăng Kí</legend>
+						 	   
+				     	 <input class="form-control" name="name" placeholder="Name" required type="text"> 
+				     	 <input class="form-control" name="phone" placeholder="Số điện thoại"  type="text"> 
+				     	<input class="form-control" name="email" placeholder="Email" type="email"> 
 				     	<input class="form-control" name="password" placeholder="Mật khẩu" type="password">
 				     	<input class="form-control" name="retypepassword" placeholder="Nhập lại mật khẩu" type="password">
 			     
-			     	<label class="radio-inline">     
-			          <input name="sex" id="inlineCheckbox1" value="male" type="radio">Nam </label>       
-			        <label class="radio-inline"> 
-			           <input name="sex" id="inlineCheckbox2" value="female" type="radio">  Nữ </label> 
-			    <br> 
 			    <br> 
 			   		 <button class="btn btn-lg btn-primary btn-block" type="submit"> Đăng ký </button> 
 				

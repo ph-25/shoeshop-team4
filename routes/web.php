@@ -23,7 +23,7 @@ Route::get('dangnhap',[
 ]);
 Route::post('dangnhap',[
 	'as'=>'login',
-	'uses'=>'userscontroller@login',
+	'uses'=>'userscontroller@postlogin',
 ]);
 Route::get('dangki',[
 	'as'=>'signin',
@@ -31,5 +31,9 @@ Route::get('dangki',[
 ]);
 Route::post('dangki',[
 	'as'=>'signin',
-	'uses'=>'userscontroller@signin',
+	'uses'=>'userscontroller@postsignin',
+]);
+Route::get('dangxuat',[
+	'as'=>'logout',
+	'uses'=>'userscontroller@logout'
 ]);
