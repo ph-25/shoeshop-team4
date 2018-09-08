@@ -24,14 +24,14 @@ class User extends Authenticatable
         'user_type',
         'remember_token',
     ];
-    public function Comments()
+    public function comments()
     {
-        return $this->hasMany('App\comments','user_id','id');
+        return $this->hasMany('App\Comment','user_id','id');
     }
 
-    public function Orders()
+    public function orders()
     {
-        return $this->hasMany('App\orders','user_id','id');
+        return $this->hasMany('App\Order','user_id','id');
     }
     /**
      * The attributes that should be hidden for arrays.

@@ -17,12 +17,12 @@ class OrderDetail extends Model
         'status',
     ];
 
-    public function Users()
+    public function users()
     {
-        return $this->belongsTo('App\users','user_id','id');
+        return $this->belongsTo('App\User','user_id','id');
     }
-    public function OrderDetails()
+    public function orderDetails()
     {
-        return $this->hasMany('App\order_detail','order_id','id');
+        return $this->hasMany('App\OrderDetail','order_id','id');
     }
 }

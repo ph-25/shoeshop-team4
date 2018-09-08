@@ -18,18 +18,18 @@ class Product extends Model
         'sex',
         'quantity',
     ];
-    public function Brands()
+    public function brands()
     {
-        return $this->hasMany('App\brands','brand_id','id');
+        return $this->hasMany('App\Brand','brand_id','id');
     }
 
-    public function OrderDetails()
+    public function orderDetails()
     {
-        return $this->hasMany('App\order_detail','product_id','id');
+        return $this->hasMany('App\OrderDetail','product_id','id');
     }
 
-    public function Comments()
+    public function comments()
     {
-        return $this->hasMany('App\comments','product_id','id');
+        return $this->hasMany('App\Comment','product_id','id');
     }
 }
