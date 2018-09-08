@@ -18,17 +18,23 @@
 		<div class = "container">
 			<div id="content">
 				<form action="{{route('login')}}" method="POST" role="form">
+					<input type="hidden" name="_token" value="{{csrf_token()}}">	
+					@if(Session::has('flag'))
+						<div class= "alert alert-{{Session::get('flag')}}">
+							{{Session::get('message')}}
+						</div>
+					@endif		
 				<div class="col-md-4 col-md-offset-4">									
 							<legend class="text-center">Đăng Nhập</legend>
 
 					<div class="form-group">
 						<label for="email">Email address</label>
-						<input type="email" class="form-control" name="email" placeholder="Input field" >
+						<input type="email" class="form-control" name="email" placeholder="Địa chỉ email" >
 					</div>
 						
 					<div class="form-group">
 						<label for="password">Password</label>
-						<input type="password" class="form-control" name="password" placeholder="Input field">
+						<input type="password" class="form-control" name="password" placeholder="Mật khẩu">
 
 					</div>
 

@@ -4,13 +4,36 @@ namespace App\Http\Controllers;
 use App\users;
 use Hash;
 use Session;
+use Auth;
 use Illuminate\Http\Request;
 
 class userscontroller extends Controller
-{
+	{
     public function login(){
     	return view('page.dangnhap');
+    }
 
+    public function postlogin(Request $request){
+    	$this->validate($request,
+    		[
+    			'email'=>'required|email',
+    			'password'=>'required|min:6|max:40'
+    		],
+    		[
+    			'email.required'=>'Vui lòng nhập email',
+    			'email.email'=>'Email không đúng định dạng',
+    			'password.required'=>'Vui lòng nhập mật khẩu',
+    			'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự',
+    			'password.max'=>'Độ dài mật khẩu tối đa 40 ký tự'
+    		]
+    	);
+
+    	$credentials=array('email'=>$request->email, 'password'=>$request->password);
+    	if(Auth::attempt($credentials)){
+    		return redirect()->back()->with(['flag'=>'success','message'=>'Đăng nhập thành công']); 
+    	}else{
+    		return redirect()->back()->with(['flag'=>'danger','message'=>'Đăng nhập không thành công']);
+    	}
     }
 
     public function signin(){
@@ -41,6 +64,10 @@ class userscontroller extends Controller
         $users->save();
         return redirect()->back()->with('thanhcong','Tạo tài khoản thành công');
     }
+
+
+
+
 
 
     public function logout(){
