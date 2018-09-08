@@ -17,7 +17,6 @@ class BrandsTableSeeder extends Seeder
             ['id'=>3,'name'=>'Giày Lười'],
             ['id'=>4,'name'=>'Giày Slip-On'],
             ['id'=>5,'name'=>'Giày Cao Gót'],
-            ['id'=>6,'name'=>'Giày Đế Xuồng']
         ]);
     }
 }
