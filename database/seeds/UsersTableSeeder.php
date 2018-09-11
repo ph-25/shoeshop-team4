@@ -16,21 +16,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-//            ['id'=>1,
-//                'name'=>"admin",
-//                'email'=>"admin@gmail.com",
-//                'password'=>"0123456789",
-//                'phone'=>"01223539732",
-//                'address'=>"Quang Nam",
-//                'rememberToken'=>'abc1234',
-//                'user_type'=>1],
+            ['id'=>1,
+                'name'=>"admin",
+                'email'=>"admin@gmail.com",
+                'password'=>"0123456789",
+                'phone'=>"01223539732",
+                'address'=>"Quang Nam",//
+                'user_type'=>1],
             ['id'=>2,
                 'name'=>"toan",
                 'email'=>"toan@gmail.com",
                 'password'=>"123456",
                 'phone'=>"01223539732",
                 'address'=>"Quang Nam",
-                'rememberToken'=>'abc123',
                 'user_type'=>0],
             ['id'=>3,
                 'name'=>"anh",
@@ -38,7 +36,6 @@ class UsersTableSeeder extends Seeder
                 'password'=>"123456",
                 'phone'=>"01223539732",
                 'address'=>"Quang Ngai",
-                'rememberToken'=>'abc123',
                 'user_type'=>0],
         ]);
 //        $faker = Faker\Factory::create();

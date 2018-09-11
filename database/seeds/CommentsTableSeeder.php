@@ -13,10 +13,10 @@ class CommentsTableSeeder extends Seeder
     {
         DB::table('comments')->insert([
            'id'=>1,
-           'content'=>"",
+           'content'=>"Giay dep, giao hang nhanh",
            'parent_id'=>1,
             'user_id'=>2,
-            'product_id'=>1
+            'product_id'=>3
         ]);
     }
 }
