@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
+    public $table = 'products';
     protected $fillable = [
         'brand_id',
         'name',
@@ -20,7 +21,7 @@ class Product extends Model
     ];
     public function brands()
     {
-        return $this->hasMany('App\Brand','brand_id','id');
+        return $this->belongsTo('App\Brand','brand_id','id');
     }
 
     public function orderDetails()
@@ -32,4 +33,3 @@ class Product extends Model
     {
         return $this->hasMany('App\Comment','product_id','id');
     }
-}

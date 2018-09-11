@@ -6,23 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
-    protected $table = 'orders';
+    protected $table = 'orders_detail';
     protected $fillable = [
-        'user_id',
-        'user_name',
-        'total',
-        'date',
-        'phone',
-        'address',
-        'status',
+        'order_id',
+        'product_id',
+        'quantity',
+        'price',
+        'product_name',
     ];
 
-    public function users()
+    public function orders()
     {
-        return $this->belongsTo('App\User','user_id','id');
+        return $this->belongsTo('App\Order','order_id','id');
     }
-    public function orderDetails()
+    public function products()
     {
-        return $this->hasMany('App\OrderDetail','order_id','id');
+        return $this->hasMany('App\Product','product_id','id');
     }
 }
