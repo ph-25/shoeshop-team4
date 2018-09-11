@@ -20,7 +20,7 @@ class Product extends Model
     ];
     public function brands()
     {
-        return $this->hasMany('App\Brand','brand_id','id');
+        return $this->belongsTo('App\Brand','brand_id','id');
     }
 
     public function orderDetails()
