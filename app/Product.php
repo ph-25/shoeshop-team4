@@ -19,17 +19,19 @@ class Product extends Model
         'sex',
         'quantity',
     ];
-    public function brands()
+
+    public function brand()
     {
-        return $this->belongsTo('App\Brand','brand_id','id');
+        return $this->belongsTo('App\Brand', 'brand_id', 'id');
     }
 
     public function orderDetails()
     {
-        return $this->hasMany('App\OrderDetail','product_id','id');
+        return $this->hasMany('App\OrderDetail', 'product_id', 'id');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Comment','product_id','id');
+        return $this->hasMany('App\Comment', 'product_id', 'id');
     }
+}

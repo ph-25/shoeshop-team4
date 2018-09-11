@@ -15,12 +15,12 @@ class Comment extends Model
 
     ];
 
-    public function products()
+    public function product()
     {
         return $this->belongsTo('App\Product','product_id','id');
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\User','user_id','id');
     }
