@@ -18,17 +18,39 @@ Route::get('/', function () {
 });
 Route::get('/',[
     'as'=>'trang-chu',
-    'uses'=>'PageController@getIndex'
+    'uses'=>'PageController@index'
 ]);
-Route::get('/brands',[
-    'as'=>'loai-giay',
-    'uses'=>'PageController@getBrand'
+//Hiển thị trang danh sách sản phẩm
+Route::get('/products',[
+    'as'=>'list-product',
+    'uses'=>'ProductController@index'
 ]);
-Route::get('/product-detail',[
-    'as'=>'chi-tiet-san-pham',
-    'uses'=>'PageController@getProductDetail'
+Route::get('/products/brand/{id}',[
+    'as' => 'products-for-brand',
+    'uses' => 'ProductController@getProductType'
 ]);
-
-Route::get('/products', [
-    'uses' => 'AdminController@index'
+//Hiển thị trang thêm sản phẩm
+Route::get('/product/create',[
+    'as'=>'create-product',
+    'uses'=>'ProductController@create'
+]);
+//Gọi hàm thêm sản phẩm
+Route::post('/products/create', [
+    'as' => 'add-product',
+    'uses' => 'ProductController@store'
+]);
+//Hiển thị trang cập nhật sản phẩm
+Route::get('/products/edit/{id}', [
+    'as' => 'edit-product',
+    'uses' => 'ProductController@edit'
+]);
+//Gọi hàm cập nhật sản phẩm
+Route::post('/products/edit/{id}', [
+    'as' => 'update-product',
+    'uses' => 'ProductController@update'
+]);
+//Gọi hàm xoá sản phẩm
+Route::get('/products/{id}', [
+    'as' => 'delete-product',
+    'uses' => 'ProductController@destroy'
 ]);
