@@ -10,12 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\products;
+//DB::enableQueryLog();
+//
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('index',['as'=>'trangchu', 'uses'=>'pagecontroller@index']);
+
+
 
 Route::get('dangnhap',[
 	'as'=>'login',
@@ -50,3 +53,21 @@ Route::group(['prefix'=>'thuong-hieu'],function (){
 Route::get('admin/profile', function () {
     //
 })->middleware('auth');
+=======
+Route::get('/',[
+    'as'=>'trang-chu',
+    'uses'=>'PageController@getIndex'
+]);
+Route::get('/brands',[
+    'as'=>'loai-giay',
+    'uses'=>'PageController@getBrand'
+]);
+Route::get('/product-detail',[
+    'as'=>'chi-tiet-san-pham',
+    'uses'=>'PageController@getProductDetail'
+]);
+
+Route::get('/products', [
+    'uses' => 'AdminController@index'
+]);
+
