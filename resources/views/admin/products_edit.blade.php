@@ -15,11 +15,8 @@
             <div class="main-content">
                 <div class="space60">&nbsp;</div>
                 <div class="row">
-                    <div class="col-sm-3">
-
-                    </div>
+                    <div class="col-sm-3"> </div>
                     <div class="col-sm-9">
-
                         <div class="beta-products-list">
                             <h4 class="pull-left">Thông tin sản phẩm</h4>
                             <div class="clearfix"></div>
@@ -30,27 +27,24 @@
                                     @if(count($errors)>0)
                                         <div class="alert alert-danger">
                                             @foreach($errors->all() as $err)
-                                                {{$err}}
+                                                <li>{{$err}}</li>
                                             @endforeach
                                         </div>
                                     @endif
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <label>ID Sản phẩm:</label>
-                                        <input class="form-control" name="ProductName"  value="{{$products->id}}"/>
+                                        <label>Tên Sản Phẩm<label style="color: red;font-size: 150%">*</label>:</label>
+                                        <input class="form-control" name="ProductName"
+                                               value="{{old('ProductName', $products->name)}}" required/>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tên Sản Phẩm:</label>
-                                        <input class="form-control" name="ProductName"  value="{{$products->name}}"/>
+                                        <label>Giá sản phẩm (VNĐ)<label style="color: red;font-size: 150%">*</label>:</label>
+                                        <input class="form-control" name="ProductPrice"
+                                               value="{{old('ProductPrice',$products->price)}}" required/>
                                     </div>
                                     <div class="form-group">
-                                        <label>Giá sản phẩm:</label>
-                                        <input class="form-control" name="ProductPrice"  value="{{$products->price}}"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mô Tả:</label>
-                                        <input class="form-control" type="text" name="ProductContent" value="{{$products->content}}"/>
-                                        {{--<textarea class="form-control" rows="10"  name="ProductContent" placeholder="{{$products->content}}"></textarea>--}}
+                                        <label>Mô Tả<label style="color: red;font-size: 150%">*</label>:</label>
+                                        <textarea class="form-control" rows="10" placeholder="Mô tả sản phẩm"  name="ProductContent" required>{{old('ProductContent',$products->content)}}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Hình ảnh hiện tại:</label><br>
@@ -63,7 +57,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Loại sản phẩm:</label>
-                                        <select class="form-control" name="BrandName">
+                                        <select class="form-control" name="BrandName" required>
+                                            <option value="{{$products->brand_id}}">{{$products->brand->name}}</option>
+                                            <option>Chọn loại sản phẩm</option>
                                             <?php foreach ($brand as $br) :?>
                                             <option  value="{{$br->id}}">{{$br->name}}</option>
                                             <?php endforeach; ?>
@@ -72,24 +68,44 @@
                                     <div class="form-group">
                                         <label>Sản phẩm cho:</label>
                                         @if($products->sex === 1)
-                                        <input type="radio" checked="checked"  name="ProductSex"  style="margin-left: 100px; margin-right: 10px;" value="{{$products->sex}}"/>Nam
-                                        <input type="radio"   name="ProductSex"  style="margin-left: 100px; margin-right: 10px;" value="{{$products->sex}}"/>Nu
+                                        <input type="radio" id="nam" checked="checked"  name="ProductSex"  style="margin-left: 100px; margin-right: 10px;" value="{{$products->sex}}"/>
+                                            <label for="nam" style="font-weight: bold">Nam</label>
+                                        <input type="radio" id="nu"   name="ProductSex"  style="margin-left: 100px; margin-right: 10px;" value="{{$products->sex}}"/>
+                                            <label for="nu" style="font-weight: bold">Nữ</label>
                                         @elseif($products->sex === 0)
-                                        <input type="radio"  name="ProductSex"  style="margin-left: 100px; margin-right: 10px;" value="1"/>Nam
-                                        <input type="radio"   name="ProductSex" checked="checked" style="margin-left: 100px; margin-right: 10px;" value="0"/>Nu
+                                        <input type="radio" id="nam"  name="ProductSex"  style="margin-left: 100px; margin-right: 10px;" value="1"/>
+                                            <label for="nam" style="font-weight: bold">Nam</label>
+                                        <input type="radio" id="nu"   name="ProductSex" checked="checked" style="margin-left: 100px; margin-right: 10px;" value="0"/>
+                                            <label for="nu" style="font-weight: bold">Nữ</label>
                                         @endif
                                     </div>
                                     <div class="pull-left">
-                                        <label>Màu sản phẩm</label>
-                                        <input class="form-control" name="ProductColor" value="{{$products->color}}" style="width: 120px; margin-right: 53px">
+                                        <label style="padding-right:52px">Màu sản phẩm<label style="color: red;font-size: 150%">*</label>:</label> <br>
+                                        <select   id="example-multiple-selected" multiple="multiple" name="ProductColor[]" required>
+                                            <option value="Đen">Đen</option>
+                                            <option value="Đỏ">Đỏ</option>
+                                            <option value="Trắng">Trắng</option>
+                                            <option value="Xanh">Xanh</option>
+                                            <option value="Nâu">Nâu</option>
+                                            <option value="Xám">Xám</option>
+                                        </select>
                                     </div>
+
                                     <div class="pull-left">
-                                        <label>Kích cỡ của sản phẩm:</label>
-                                        <input class="form-control" name="ProductSize" value="{{$products->size}}" style="width: 120px" />
+                                        <label>Kích cỡ của sản phẩm<label style="color: red;font-size: 150%">*</label>:</label> <br>
+                                        <select id="example-multiple-selected-2" multiple="multiple" name="ProductSize[]" required>
+                                            <option value="36">36</option>
+                                            <option value="37">37</option>
+                                            <option value="38">38</option>
+                                            <option value="39">39</option>
+                                            <option value="40">40</option>
+                                            <option value="41">41</option>
+                                            <option value="42">42</option>
+                                        </select>
                                     </div>
                                     <div class="pull-right">
-                                        <label>Số lượng:</label>
-                                        <input class="form-control" name="ProductQuantity" value="{{$products->quantity}}" style="width: 120px" />
+                                        <label>Số lượng (đôi)<label style="color: red;font-size: 150%">*</label>:</label><br>
+                                        <input class="form-control" value="{{old('ProductQuantity',$products->quantity)}}" name="ProductQuantity" style="width: 100px" required/>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div style="padding-bottom: 40px"></div>

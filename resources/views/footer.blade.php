@@ -4,7 +4,7 @@
                         <div>
                             <div class="contact-info">
                                 <i class="fa fa-map-marker"></i>
-                                <p>79 Quang Trung, Quan Hai Chau, TP Da Nang,</p>
+                                <p>92 Quang Trung, Quan Hai Chau, TP Da Nang,</p>
                                 <p> Phone: +84 123 456 78</p>
                             </div>
                         </div>

@@ -11,7 +11,7 @@
                 <ul class="top-details menu-beta l-inline">
                     <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
                     <li><a href="#">Đăng kí</a></li>
-                    <li><a href="#">Đăng nhập</a></li>
+                    <li><a href="{{route('list-product')}}">Đăng nhập</a></li>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -90,11 +90,11 @@
             <div class="visible-xs clearfix"></div>
             <nav class="main-menu">
                 <ul class="l-inline ov">
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="#">Sản phẩm</a>
+                    <li><a href="">Trang chủ</a></li>
+                    <li><a href="{{route('view-product')}}">Sản phẩm</a>
                         <ul class="sub-menu">
                             @foreach($brand as $br)
-                                <li><a href="{{route('products-for-brand',$br->id)}}">{{$br->name}}</a></li>
+                                <li><a href="{{route('view-for-brand',$br->id)}}">{{$br->name}}</a></li>
                             @endforeach
                         </ul>
                     </li>
