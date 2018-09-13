@@ -19,21 +19,34 @@ Route::get('/', function () {
 
 Route::get('dangnhap',[
 	'as'=>'login',
-	'uses'=>'userscontroller@login',
+	'uses'=>'UsersController@login',
 ]);
 Route::post('dangnhap',[
 	'as'=>'login',
-	'uses'=>'userscontroller@postlogin',
+	'uses'=>'UsersController@login',
 ]);
 Route::get('dangki',[
 	'as'=>'signin',
-	'uses'=>'userscontroller@signin',
+	'uses'=>'UsersController@signin',
 ]);
 Route::post('dangki',[
 	'as'=>'signin',
-	'uses'=>'userscontroller@postsignin',
+	'uses'=>'UsersController@postSignin',
 ]);
 Route::get('dangxuat',[
 	'as'=>'logout',
-	'uses'=>'userscontroller@logout'
+	'uses'=>'UsersController@logout'
 ]);
+
+Route::group(['prefix'=>'thuong-hieu'],function (){
+		Route::get('danh-sach','BrandController@getListBrand');
+		Route::get('them','BrandController@getAddBrand');
+		Route::post('them','BrandController@postAddBrand');
+		Route::get('sua/{id}','BrandController@getEditBrand');
+		Route::post('sua/{id}','BrandController@postEditBrand');
+		Route::get('xoa/{id}','BrandController@getDelBrand');
+	});	
+
+Route::get('admin/profile', function () {
+    //
+})->middleware('auth');

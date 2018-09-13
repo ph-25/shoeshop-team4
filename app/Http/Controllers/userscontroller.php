@@ -6,14 +6,17 @@ use Hash;
 use Session;
 use Auth;
 use Illuminate\Http\Request;
+use validator;
 
 class userscontroller extends Controller
 	{
+      
+
     public function login(){
     	return view('page.dangnhap');
     }
 
-    public function postlogin(Request $request){
+    public function postLogin(Request $request){
     	$this->validate($request,
     		[
     			'email'=>'required|email',
@@ -39,7 +42,7 @@ class userscontroller extends Controller
     public function signin(){
     	return view ('page.dangki');
     }
-  public function postsignin(Request $request){
+  public function postSignin(Request $request){
         $this->validate($request,
             [
                 'email'=>'required|email|unique:users,email',
