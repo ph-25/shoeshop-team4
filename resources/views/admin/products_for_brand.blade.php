@@ -72,7 +72,7 @@
                                         <img src="{!! asset('public/source/image/product/'.$product['image']) !!}" alt="{{$product->name}}" width="90px" height="90px">
                                     </td>
                                     <td style="text-align: center">{{$product->color}}</td>
-                                    <td>{{$product->brand->name}}</td>
+                                    {{--<td>{{$product->brand->name}}</td>--}}
                                     <td style="text-align: center">{{$product->size}}</td>
                                     <td style="text-align: center">
                                         @if($product->sex == 1) Nam

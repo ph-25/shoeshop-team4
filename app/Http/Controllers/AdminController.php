@@ -23,14 +23,10 @@ class AdminController extends Controller
 
     public function index()
     {
-        $product = Product::with('brands')->get();
+        $product = Product::with('brand')->get();
         $product = Product::paginate(4);
         return view('page/trangchu', ['product' => $product]);
     }
 
-    public function brandIndex()
-    {
-        $brand = Brand::get();
-        return view('admin/brands_list', ['brand' => $brand]);
-    }
+
 }

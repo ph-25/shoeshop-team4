@@ -182,4 +182,11 @@ class ProductController extends Controller
 
         return redirect()->back()->with('delete','Xoá '.$products->name.' thành công!');
     }
+//    public function detail($id)
+//    {
+//        $products = Product::with('brand')->find($id);
+//        $brand = Brand::with('products')->get();
+//        return view('admin/products_edit',['products'=>$products]);
+//        return view('page/product_detail',compact(  'products','brand'));
+//    }
 }

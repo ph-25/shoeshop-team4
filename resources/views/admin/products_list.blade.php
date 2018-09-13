@@ -61,10 +61,10 @@
                                     </tr>
                                 </thead>
                             <tbody>
-                            <?php foreach ($products as $product): ?>
+                            @foreach ($products as $product)
                                 <tr class="odd gradeX" align="center">
                                     <td style="text-align: center">{{$product->id}}</td>
-                                    <td>{{$product->name}}</td>
+                                    <td><a href="{{route('details-product',$product->id)}}">{{$product->name}}</a></td>
                                     <td style="text-align: center">{{$product->price}}</td>
                                     <td>{{$product->content}}</td>
                                     <td style="text-align: center">
@@ -83,7 +83,7 @@
                                     <td class="center" style="text-align: center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('edit-product',$product->id)}}">Edit</a></td>
 
                                 </tr>
-                            <?php endforeach ?>
+                            @endforeach
 
                             </tbody>
                             </table>

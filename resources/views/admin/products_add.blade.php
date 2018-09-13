@@ -71,18 +71,20 @@
                                         <input type="radio"  name="ProductSex"  style="margin-left: 100px;margin-right: 10px;" value="1"/>Nam
                                         <input type="radio"  name="ProductSex"  style="margin-left: 100px;margin-right: 10px;" value="0"/>Nu
                                     </div>
+
                                     <div class="pull-left">
                                         <label>Màu sản phẩm:</label>
                                         <input class="form-control" name="ProductColor" style="width: 120px; margin-right: 60px" required>
                                     </div>
                                     <div class="pull-left">
                                         <label>Kích cỡ của sản phẩm:</label>
-                                        <input class="form-control" name="ProductSize" style="width: 120px" required/>
+                                        <input class="form-control" name="ProductSize[] " style="width: 120px" required/>
                                     </div>
                                     <div class="pull-right">
                                         <label>Số lượng:</label>
                                         <input class="form-control" name="ProductQuantity" style="width: 120px" required/>
                                     </div>
+
                                     <div class="clearfix"></div>
                                     <div style="padding-bottom: 40px"></div>
                                         <button type="submit" class="btn btn-default" style="width: 120px; margin-right: 60px">Thêm</button>

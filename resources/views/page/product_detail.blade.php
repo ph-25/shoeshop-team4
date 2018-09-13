@@ -2,9 +2,7 @@
 @section('content')
 <div class="inner-header">
     <div class="container">
-        <div class="pull-left">
-            <h6 class="inner-title">Product</h6>
-        </div>
+
         <div class="pull-right">
             <div class="beta-breadcrumb font-large">
                 <a href="index.html">Home</a> / <span>Product</span>
@@ -21,13 +19,13 @@
 
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src="source/assets/dest/images/products/6.jpg" alt="">
+                        <img style="border: solid 1px;" src="{!! asset('public/source/image/product/'.$products['image']) !!}" alt="">
                     </div>
                     <div class="col-sm-8">
                         <div class="single-item-body">
-                            <p class="single-item-title">Sample Woman Top</p>
+                            <p class="single-item-title">{{$products->name}}</p>
                             <p class="single-item-price">
-                                <span>$34.55</span>
+                                <span>{{$products->price}}</span>
                             </p>
                         </div>
 
@@ -35,35 +33,36 @@
                         <div class="space20">&nbsp;</div>
 
                         <div class="single-item-desc">
-                            <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo ms id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
+                            <p>{{$products->content}}</p>
                         </div>
                         <div class="space20">&nbsp;</div>
 
                         <p>Options:</p>
                         <div class="single-item-options">
-                            <select class="wc-select" name="size">
-                                <option>Size</option>
-                                <option value="XS">XS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
+                            <select class="wc-select" name="ProductSize">
+                                <option>Kích thước</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
                             </select>
-                            <select class="wc-select" name="color">
-                                <option>Color</option>
-                                <option value="Red">Red</option>
-                                <option value="Green">Green</option>
-                                <option value="Yellow">Yellow</option>
-                                <option value="Black">Black</option>
-                                <option value="White">White</option>
+                            <select class="wc-select" name="ProductColor" >
+                                <option>Màu</option>
+                                <option value="do">Đỏ</option>
+                                <option value="den">Đen</option>
+                                <option value="trang">Trắng</option>
+                                <option value="xanh">Xanh</option>
+                                <option value="kem">Kem</option>
+                                <option value="xam">Xám</option>
+                                <option value="nau">Nâu</option>
                             </select>
-                            <select class="wc-select" name="color">
-                                <option>Qty</option>
+                            <select class="wc-select" name="ProductQuantity">
+                                <option>Số lượng</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
                             </select>
                             <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
                             <div class="clearfix"></div>

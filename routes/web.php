@@ -20,6 +20,18 @@ Route::get('/',[
     'as'=>'trang-chu',
     'uses'=>'PageController@index'
 ]);
+Route::get('/product/details/{id}', [
+    'as' => 'details-product',
+    'uses' => 'PageController@detail'
+]);
+Route::get('/product/list', [
+    'as' => 'view-product',
+    'uses' => 'PageController@show'
+]);
+Route::get('/product/brand/{id}',[
+    'as' => 'view-for-brand',
+    'uses' => 'PageController@showForBrand'
+]);
 //Hiển thị trang danh sách sản phẩm
 Route::get('/products',[
     'as'=>'list-product',
