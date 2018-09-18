@@ -83,9 +83,8 @@
                                 </div>
                                 <div class="single-item-body" >
                                     <a href="{{route('details-product',$product->id)}}"> <h6 class="single-item-title">{{$product->name}}</h6></a>
-s
                                     <p class="single-item-price" style="margin-bottom: 5px">
-                                        <span>{{number_format($product->price)}} đồng</span>
+                                        <span>{{number_format($product->price,0,',','.')}} đồng</span>
                                     </p>
                                 </div>
                                 <div class="single-item-caption">
@@ -110,7 +109,7 @@ s
                                         <img style="border: solid 1px;" src="{!! asset('public/source/image/product/'.$product['image']) !!}" alt=""></a>
                                 <div class="media-body">
                                     <a href="{{route('details-product',$product->id)}}" class="single-item-title">{{$product->name}}</a>
-                                    <p>{{number_format($product->price)}} đồng</p>
+                                    <p>{{number_format($product->price,0,',','.')}} đồng</p>
                                 </div>
                             </div>
                             @endforeach
@@ -127,7 +126,7 @@ s
                                         <img style="border: solid 1px;" src="{!! asset('public/source/image/product/'.$product['image']) !!}" alt=""></a>
                                     <div class="media-body">
                                         <a href="{{route('details-product',$product->id)}}" class="single-item-title">{{$product->name}}</a>
-                                        <p>{{number_format($product->price)}} đồng</p>
+                                        <p>{{number_format($product->price,0,',','.')}} đồng</p>
                                     </div>
                                 </div>
                             @endforeach
