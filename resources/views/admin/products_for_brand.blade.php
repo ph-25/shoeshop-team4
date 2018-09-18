@@ -76,7 +76,7 @@
                                             <td style="text-align: center">{{$product->size}}</td>
                                             <td style="text-align: center">
                                                 @if($product->sex == 1) Nam
-                                                @else Nữ
+                                                @else Nu
                                                 @endif
                                             </td>
                                             <td style="text-align: center">{{$product->quantity}}</td>
