@@ -25,7 +25,7 @@ class OrdersTableSeeder extends Seeder
             [
                 'id'=>2,
                 'user_id'=>3,
-                'user_name'=>anh,
+                'user_name'=>'anh',
                 'total'=>"335000",
                 'date'=>date_create(),
                 'phone'=>"0123456789",

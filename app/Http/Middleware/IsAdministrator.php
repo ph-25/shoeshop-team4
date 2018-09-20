@@ -1,6 +1,7 @@
 <?php
  namespace App\Http\Middleware;
  use Closure;
+ use App\User;
 
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Illuminate\Support\Facades\Auth;
@@ -16,15 +17,19 @@ use Illuminate\Support\Facades\Auth;
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::guard('admins')->check())
+         if (Auth::check())
         {
-            if(Auth::guard('admins')->users()->user_type == 0){
-               
-                return redirect('login');
-            }
-        }else{
-            return redirect('dangnhap');
-        }
-         return $next($request);
-    }
+            $User = Auth::User();
+            
+            if ($User->user_type == 1  )
+            
+                return $next($request);
+            
+            else
+                  return redirect()->route('trang-chu');
+        }else    
+                
+                return redirect()->route('trang-chu');
+    }      
+        
 }

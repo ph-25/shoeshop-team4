@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\brands;
+use App\Brand;
+use App\validator;
 class BrandController extends Controller
 {
      public function getAddBrand()
@@ -20,20 +21,20 @@ class BrandController extends Controller
     		"brand.unique" => "Thương hiệu đã tồn tại",
     		
     	]);
-    	$brands = new brands;
-    	$brands->name = $request->brand;
-    	$brands->save();
-    	return  redirect('thuong-hieu/danh-sach')->with('message',"Thêm thành công");
+    	$Brand = new Brand;
+    	$Brand->name = $request->brand;
+    	$Brand->save();
+    	return  redirect('admin/brand/danh-sach')->with('message',"Thêm thành công");
     }
     public function getListBrand()
     {
-    	$brands = brands::all();
-    	return view('admin.brand.list_brand',compact('brands'));
+    	$Brand = Brand::all();
+    	return view('admin.brand.list_brand',compact('Brand'));
     }
     public function getEditBrand($id)
     {
-    	$brands = brands::find($id);
-    	return view('admin.brand.edit_brand',compact('brands'));
+    	$Brand = Brand::find($id);
+    	return view('admin.brand.edit_brand',compact('Brand'));
     }
     public function postEditBrand($id, Request $request)
     {
@@ -46,15 +47,15 @@ class BrandController extends Controller
     		"brand.unique" => "Thương hiệu đã tồn tại",
     		
     	]);
-    	$brands = brands::find($id);
-    	$brands->name = $request->brand;
-    	$brands->save();
-    	return redirect("thuong-hieu/sua/".$id)->with('message','Sửa thành công'); 
+    	$Brand=  Brand::find($id);
+    	$Brand->name = $request->brand;
+    	$Brand->save();
+    	return redirect("admin/brand/sua/".$id)->with('message','Sửa thành công'); 
     }
     public function getDelBrand($id)
    {
-        $brands = brands::find($id);
-        $brands->delete();
-        return redirect('thuong-hieu/danh-sach')->with('message','Xóa thành công');
+        $Brand = Brand::find($id);
+        $Brand->delete();
+        return redirect('admin/brand/danh-sach')->with('message','Xóa thành công');
    }
 }
