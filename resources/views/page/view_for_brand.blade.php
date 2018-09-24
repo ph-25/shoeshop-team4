@@ -13,6 +13,7 @@
                                     <div class="alert alert-success">{{Session::get('addcart')}}<div class="pull-right"><a href="{{route('cart')}}">Xem giỏ hàng</a></div></div>
                                 @endif
                             </div>
+
                             <div class="beta-products-details">
                                 <div class="clearfix"></div>
                             </div>
@@ -32,6 +33,7 @@
                                         </div>
                                         <div class="single-item-caption">
                                             <a class="add-to-cart pull-left" href="{!! url('add-cart',[$product->id,$product->alias]) !!}"><i class="fa fa-shopping-cart"></i></a>
+
                                             <a class="beta-btn primary" style="margin-bottom: 30px" href="{{route('details-product',$product->id)}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>

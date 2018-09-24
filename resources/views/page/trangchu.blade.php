@@ -39,6 +39,7 @@
 
                 </div>
                 <div class="col-sm-12">
+
                     <div class="beta-products-list pull-left">
                         <a href="{{route('view-product')}}"> <h4 style="font-size: 200%">Sản phẩm mới</h4></a>
                             <div class="clearfix"></div>
@@ -49,6 +50,7 @@
                                     <div class="single-item-header">
                                         <a href="{{route('details-product',$product->id)}}"><img style="border: solid 1px;" src="{!! asset('public/source/image/product/'.$product['image']) !!}" alt=""></a>
                                     </div>
+
                                     <div class="single-item-body" >
                                         <a href="{{route('details-product',$product->id)}}"> <h6 class="single-item-title">{{$product->name}}</h6></a>
                                         <p class="single-item-price" style="margin-bottom: 5px">

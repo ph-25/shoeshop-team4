@@ -209,5 +209,4 @@ class ProductController extends Controller
         $products->delete($id);
         return redirect()->back()->with('delete', 'Xoá ' . $products->name . ' thành công!');
     }
-
 }

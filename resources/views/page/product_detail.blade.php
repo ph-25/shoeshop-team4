@@ -70,9 +70,7 @@
                         <div class="space20">&nbsp;</div>
                         <div class="single-item-options" >
                             <div class="single-item">
-
                             <a class="add-to-cart" href="{!! url('add-cart',[$products->id,$products->alias]) !!}"><i class="fa fa-shopping-cart"></i></a>
-
                             </div>
                         </div>
                     </div>

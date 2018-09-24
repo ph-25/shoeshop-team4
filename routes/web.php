@@ -28,11 +28,13 @@ Route::get('/product/list', [
     'as' => 'view-product',
     'uses' => 'PageController@show'
 ]);
+
 Route::get('/brand/{id}',[
     'as' => 'view-for-brand',
     'uses' => 'PageController@showForBrand'
 ]);
 //Hiển thị trang quan ly danh sách sản phẩm
+
 Route::get('/products',[
     'as'=>'list-product',
     'uses'=>'ProductController@index'
