@@ -7,6 +7,8 @@ use App\Product;
 use App\Brand;
 use DB;
 use Session;
+use Validator;
+use Input;
 
 class ProductController extends Controller
 {
@@ -18,19 +20,21 @@ class ProductController extends Controller
      */
     public function getProductType($id)
     {
-        $perPage = 10;
+
+        $perPage = 5;
         $products_type = Product::where('brand_id', $id)->orderBy('created_at','desc')->paginate($perPage);
-        $brand = Brand::get();
+        $brands = Brand::get();
         $brand_type = Brand::where('id', $id)->first();
-        return view('admin/products_for_brand', compact('products_type', 'brand', 'brand_type'));
+        return view('admin/products_for_brand', compact('products_type', 'brands', 'brand_type'));
     }
 
     public function index()
     {
-        $perPage = 10;
+        $perPage = 5;
         $products = Product::with('brand')->orderBy('created_at', 'desc')->paginate($perPage);
-        $brand = Brand::get();
-        return view('admin/products_list', compact('products', 'brand'));
+        $brands = Brand::get();
+//        dd($products);
+        return view('admin/products_list', compact('products', 'brands','test'));
     }
 
     /**
@@ -38,11 +42,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $products = Product::with('brand')->get();
-        $brand = Brand::with('products')->get();
-        return view('admin/products_add', compact('products', 'brand'));
+        $brands = Brand::get();
+        $brand = Brand::pluck('name', 'id');
+        return view('admin/products_add', compact('products', 'brands','brand'));
 //        return view('admin/products_add',['brand'=>$brand]);
 
     }
@@ -55,9 +60,9 @@ class ProductController extends Controller
 //     */
     public function store(Request $request)
     {
-        $this->validate($request,
+        $request->validate(
             [
-                'ProductName' => 'required|max:20',
+                'ProductName' => 'required|max:50',
                 'ProductPrice' => 'required|integer',
                 'ProductContent' => 'required',
                 'ProductImage' => 'required',
@@ -66,11 +71,10 @@ class ProductController extends Controller
                 'ProductSize' => 'required',
                 'ProductSex' => 'required',
                 'ProductQuantity' => 'required|integer'
-
             ],
             [
                 'ProductName.required' => 'Chưa nhập tên sản phẩm',
-                'ProductName.max' => 'Tên sản phẩm tối đa 20 ký tự',
+                'ProductName.max' => 'Tên sản phẩm tối đa 50 ký tự',
                 'ProductPrice.required' => 'Chưa nhập giá sản phẩm',
                 'ProductPrice.integer' => 'Giá của sản phẩm phải là kiểu số nguyên',
                 'ProductContent.required' => 'Chưa nhập phần mô tả sản phẩm',
@@ -81,11 +85,13 @@ class ProductController extends Controller
                 'ProductSex.required' => 'Chưa chọn sản phẩm cho Nam/Nữ',
                 'ProductQuantity.required' => 'Chưa nhập số lượng có sẵn của sản phẩm',
                 'ProductQuantity.integer' => 'Số lượng của sản phẩm phải là kiểu số nguyên'
-            ]);
+            ]
+        );
 
         $products = Product::with('brand')->get();
+        $brands = Brand::pluck('name', 'id');
         $file_name = $request->file('ProductImage')->getClientOriginalName();
-        $fileName = time() . "_" . rand(0, 9999999) . "_" . md5(rand(0, 9999999)) . "." . $file_name;
+        $fileName = time() . "_" . rand(0, 9999999) . "_" . md5(rand(0, 9999999)) . "_" . $file_name;
         $products = new Product;
         $products->name = $request->ProductName;
         $products->price = $request->ProductPrice;
@@ -98,7 +104,6 @@ class ProductController extends Controller
         $products->quantity = $request->ProductQuantity;
         $request->file('ProductImage')->move('public/source/image/product', $file_name);
         $products->save();
-//        return redirect()->back()->with('success','Them thanh cong');
         return redirect(route('list-product'))->with('add', 'Thêm ' . $products->name . ' thành công!');
     }
 
@@ -121,11 +126,11 @@ class ProductController extends Controller
 //     */
     public function edit($id)
     {
-        $products = Product::with('brand')->find($id);
-        $brand = Brand::with('products')->get();
-//        return view('admin/products_edit',['products'=>$products]);
-        return view('admin/products_edit', compact('products', 'brand'));
 
+        $products = Product::with('brand')->find($id);
+        $brands = Brand::get();
+        $brand = Brand::pluck('name', 'id');
+        return view('admin/products_edit', compact('products', 'brands','brand'));
     }
 //
 //    /**
@@ -137,29 +142,35 @@ class ProductController extends Controller
 //     */
     public function update(Request $request, $id)
     {
-        $this->validate($request,
+        $request->validate(
             [
-                'ProductName' => 'required',
+                'ProductName' => 'required|max:50',
                 'ProductPrice' => 'required|integer',
-                'ProductContent' => 'required',//
+                'ProductContent' => 'required',
+//                'ProductImage' => 'required',
                 'ProductColor' => 'required',
                 'BrandName' => 'required',
-                'ProductSize' => 'required',//
+                'ProductSize' => 'required',
+                'ProductSex' => 'required',
                 'ProductQuantity' => 'required|integer'
             ],
             [
                 'ProductName.required' => 'Chưa nhập tên sản phẩm',
+                'ProductName.max' => 'Tên sản phẩm tối đa 20 ký tự',
                 'ProductPrice.required' => 'Chưa nhập giá sản phẩm',
                 'ProductPrice.integer' => 'Giá của sản phẩm phải là kiểu số nguyên',
                 'ProductContent.required' => 'Chưa nhập phần mô tả sản phẩm',
+//                'ProductImage.required' => 'Chưa chọn ảnh cho sản phẩm',
                 'ProductColor.required' => 'Chưa chọn màu cho sản phẩm',
                 'BrandName.required' => 'Chưa chọn loại sản phẩm',
                 'ProductSize.required' => 'Chưa chọn kích cỡ của sản phẩm',
+                'ProductSex.required' => 'Chưa chọn sản phẩm cho Nam/Nữ',
                 'ProductQuantity.required' => 'Chưa nhập số lượng có sẵn của sản phẩm',
                 'ProductQuantity.integer' => 'Số lượng của sản phẩm phải là kiểu số nguyên'
-            ]);
+            ]
+        );
 
-
+        $brands = Brand::pluck('name', 'id');
         $products = Product::find($id);
 //
         if (!empty($request->ProductImage)) {

@@ -28,11 +28,11 @@ Route::get('/product/list', [
     'as' => 'view-product',
     'uses' => 'PageController@show'
 ]);
-Route::get('/product/brand/{id}',[
+Route::get('/brand/{id}',[
     'as' => 'view-for-brand',
     'uses' => 'PageController@showForBrand'
 ]);
-//Hiển thị trang danh sách sản phẩm
+//Hiển thị trang quan ly danh sách sản phẩm
 Route::get('/products',[
     'as'=>'list-product',
     'uses'=>'ProductController@index'
@@ -43,14 +43,14 @@ Route::get('/products/brand/{id}',[
 ]);
 //Hiển thị trang thêm sản phẩm
 Route::get('/product/create',[
-    'as'=>'create-product',
+    'as'=>'add-product',
     'uses'=>'ProductController@create'
 ]);
-//Gọi hàm thêm sản phẩm
-Route::post('/products/create', [
-    'as' => 'add-product',
+Route::post('/product/add',[
+    'as' => 'create-product',
     'uses' => 'ProductController@store'
 ]);
+
 //Hiển thị trang cập nhật sản phẩm
 Route::get('/products/edit/{id}', [
     'as' => 'edit-product',
@@ -65,8 +65,22 @@ Route::post('/products/edit/{id}', [
 Route::get('/products/{id}', [
     'as' => 'delete-product',
     'uses' => 'ProductController@destroy'
+])->where('id', '[0-9]+');
+//cart
+Route::get('cart',[
+    'as' => 'cart',
+    'uses' => 'PageController@indexCart'
 ]);
-ROute::get('/order/{id}',[
-    'as' => 'order-product',
-    'uses' => 'PageController@order'
+Route::get('add-cart/{id}',[
+    'as' => 'add-cart',
+    'uses' => 'PageController@cart'
 ]);
+Route::get('del/{id}',[
+    'as' => 'del-pro-cart',
+    'uses' => 'PageController@delProCart'
+]);
+Route::post('update-cart', [
+    'as' => 'cart.update',
+    'uses' => 'PageController@updateCart'
+]);
+

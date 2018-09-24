@@ -19,8 +19,8 @@
                     <div class="col-sm-2">
                         <div class="space60">&nbsp;</div>
                         <ul class="aside-menu">
-                            <?php foreach ($brand as $br): ?>
-                            <li><a href="{{route('products-for-brand',$br->id)}}">{{$br->name}}</a></li>
+                            <?php foreach ($brands as $brand): ?>
+                            <li><a href="{{route('products-for-brand',$brand->id)}}">{{$brand->name}}</a></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -31,7 +31,7 @@
                                 </h4>
                             </div>
                             <div class="pull-right">
-                                <a class="form-control" style="text-align: center; background-color: #5c92cf; color: yellow; padding:5px 3px 5px 3px" href="{{route('create-product')}}">Thêm sản phẩm mới</a>
+                                <a class="btn btn-default pull-right" href="{{route('add-product')}}">Thêm sản phẩm mới</a>
                             </div>
                             <div class="clearfix"></div>
                             <div style="padding-bottom: 20px">
@@ -71,9 +71,31 @@
                                             <td style="text-align: center">
                                                 <img src="{!! asset('public/source/image/product/'.$product['image']) !!}" alt="{{$product->name}}" width="90px" height="90px">
                                             </td>
-                                            <td style="text-align: center">{{$product->color}}</td>
+                                            <td style="text-align: center">
+                                                @php
+                                                    $color = $product->color;
+                                                    $arr = explode(',',$color);
+                                                @endphp
+                                                @foreach ($arr as $key)
+                                                    @foreach(COLORS as $colorKey => $colorName)
+                                                        @if($key == $colorKey ){{$colorName}}
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            </td>
                                             {{--<td>{{$product->brand->name}}</td>--}}
-                                            <td style="text-align: center">{{$product->size}}</td>
+                                            <td style="text-align: center">
+                                                @php
+                                                    $size = $product->size;
+                                                    $arr = explode(',',$size);
+                                                @endphp
+                                                @foreach ($arr as $key)
+                                                    @foreach(SIZES as $sizeKey => $sizeName)
+                                                        @if($key == $sizeKey ){{$sizeName}}
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            </td>
                                             <td style="text-align: center">
                                                 @if($product->sex == 1) Nam
                                                 @else Nữ

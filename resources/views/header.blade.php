@@ -33,8 +33,11 @@
 
                 <div class="beta-comp">
                     <div class="cart">
-                        <div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng (Trống) <i class="fa fa-chevron-down"></i></div>
+                        <div class="beta-select">
+                            <a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
+                            </div>
                         <div class="beta-dropdown cart-body">
+
                             <div class="cart-item">
                                 <div class="media">
                                     <a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/1.png" alt=""></a>
@@ -93,8 +96,8 @@
                     <li><a href="">Trang chủ</a></li>
                     <li><a href="{{route('view-product')}}">Sản phẩm</a>
                         <ul class="sub-menu">
-                            @foreach($brand as $br)
-                                <li><a href="{{route('view-for-brand',$br->id)}}">{{$br->name}}</a></li>
+                            @foreach($brands as $brand)
+                                <li><a href="{{route('view-for-brand',$brand->id)}}">{{$brand->name}}</a></li>
                             @endforeach
                         </ul>
                     </li>

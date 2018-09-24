@@ -35,16 +35,16 @@
                                     <div class="form-group">
                                         <label>Tên Sản Phẩm<label style="color: red;font-size: 150%">*</label>:</label>
                                         <input class="form-control" name="ProductName"
-                                               value="{{old('ProductName', $products->name)}}" required/>
+                                               value="{{old('ProductName', $products->name)}}"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Giá sản phẩm (VNĐ)<label style="color: red;font-size: 150%">*</label>:</label>
                                         <input class="form-control" name="ProductPrice"
-                                               value="{{old('ProductPrice',$products->price)}}" required/>
+                                               value="{{old('ProductPrice',$products->price)}}"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Mô Tả<label style="color: red;font-size: 150%">*</label>:</label>
-                                        <textarea class="form-control" rows="10" placeholder="Mô tả sản phẩm"  name="ProductContent" required>{{old('ProductContent',$products->content)}}</textarea>
+                                        <textarea class="form-control" rows="10" placeholder="Mô tả sản phẩm"  name="ProductContent">{{old('ProductContent',$products->content)}}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Hình ảnh hiện tại:</label><br>
@@ -57,11 +57,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Loại sản phẩm:</label>
-                                        <select class="form-control" name="BrandName" required>
-                                            <option value="{{$products->brand_id}}">{{$products->brand->name}}</option>
-                                            <option>Chọn loại sản phẩm</option>
-                                            <?php foreach ($brand as $br) :?>
-                                            <option  value="{{$br->id}}">{{$br->name}}</option>
+                                        <select class="form-control" name="BrandName">
+                                            <option disabled="disabled">Chọn loại sản phẩm</option>
+                                                <?php foreach ($brand as $brandKey => $brandName) :?>
+                                                @if(old('BrandName', $products->brand_id) == $brandKey )
+                                                    <option value="{{ $brandKey }}" selected>{{ $brandName }}</option>
+                                                @else
+                                                    <option value="{{ $brandKey }}">{{ $brandName }}</option>
+                                                @endif
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -81,43 +84,53 @@
                                     </div>
                                     <div class="pull-left">
                                         <label style="padding-right:52px">Màu sản phẩm<label style="color: red;font-size: 150%">*</label>:</label> <br>
-                                        <select   id="example-multiple-selected" multiple="multiple" name="ProductColor[]" required>
-                                            <option value="Đen">Đen</option>
-                                            <option value="Đỏ">Đỏ</option>
-                                            <option value="Trắng">Trắng</option>
-                                            <option value="Xanh">Xanh</option>
-                                            <option value="Nâu">Nâu</option>
-                                            <option value="Xám">Xám</option>
-                                        </select>
-                                    </div>
+                                        <select   id="example-multiple-selected" multiple="multiple" name="ProductColor[]">
+                                            @php
+                                                $color = $products->color;
+                                                $arrColor = explode(',',$color);
+                                            @endphp
+                                                @foreach (COLORS as $colorKey => $colorName)
+                                                <option value="{{ $colorKey }}"
+                                                    @if (old("ProductColor")) {{ (in_array($colorKey, old("ProductColor")) ? "selected":"") }}
+                                                    @elseif (in_array($colorKey, $arrColor)) selected
+                                                    @endif>{{$colorName}}
+                                                </option>
+                                            @endforeach
+                                    </select>
+                                </div>
 
-                                    <div class="pull-left">
-                                        <label>Kích cỡ của sản phẩm<label style="color: red;font-size: 150%">*</label>:</label> <br>
-                                        <select id="example-multiple-selected-2" multiple="multiple" name="ProductSize[]" required>
-                                            <option value="36">36</option>
-                                            <option value="37">37</option>
-                                            <option value="38">38</option>
-                                            <option value="39">39</option>
-                                            <option value="40">40</option>
-                                            <option value="41">41</option>
-                                            <option value="42">42</option>
-                                        </select>
-                                    </div>
-                                    <div class="pull-right">
-                                        <label>Số lượng (đôi)<label style="color: red;font-size: 150%">*</label>:</label><br>
-                                        <input class="form-control" value="{{old('ProductQuantity',$products->quantity)}}" name="ProductQuantity" style="width: 100px" required/>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div style="padding-bottom: 40px"></div>
-                                    <button type="submit" class="btn btn-default">Cập nhật</button>
-                                </form>
-                            </div>
-                            <div class="space50">&nbsp;</div>
-                        </div> <!-- end section with sidebar and main content -->
-                    </div> <!-- .main-content -->
-                </div> <!-- #content -->
-            </div> <!-- .container -->
-        </div>
+                                <div class="pull-left">
+                                    <label>Kích cỡ của sản phẩm<label style="color: red;font-size: 150%">*</label>:</label> <br>
+                                    <select id="example-multiple-selected-2" multiple="multiple" name="ProductSize[]">
+                                        @php
+                                            $size = $products->size;
+                                            $arrSize = explode(',',$size);
+                                        @endphp
+                                        @foreach (SIZES as $sizeKey => $sizeName)
+                                            <option value="{{ $sizeKey }}"
+                                                    @if  (old("ProductSize")) {{ (in_array($sizeKey, old("ProductSize")) ? "selected":"") }}
+                                                    @elseif(in_array($sizeKey,$arrSize)) selected
+                                                    @endif>{{$sizeName}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="pull-right">
+                                    <label>Số lượng (đôi)<label style="color: red;font-size: 150%">*</label>:</label><br>
+                                    <input class="form-control" value="{{old('ProductQuantity',$products->quantity)}}" name="ProductQuantity" style="width: 100px"/>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div style="padding-bottom: 40px"></div>
+                                <button type="submit" class="btn btn-default">Cập nhật</button>
+                            </form>
+                            <a href="{{route('list-product')}}" type="submit" class="btn btn-default pull-right">Huỷ bỏ</a>
+                        </div>
+                        <div class="space50">&nbsp;</div>
+                    </div> <!-- end section with sidebar and main content -->
+                </div> <!-- .main-content -->
+            </div> <!-- #content -->
+        </div> <!-- .container -->
     </div>
+</div>
 @endsection
 

@@ -12,6 +12,12 @@
 
 <div class="container">
     <div id="content">
+        <div>
+            @if(Session::has('addcart'))
+                <div class="alert alert-success">{{Session::get('addcart')}} <div class="pull-right"><a href="{{route('cart')}}">Xem giỏ hàng</a></div></div>
+
+            @endif
+        </div>
         <div class="row">
             <div class="col-sm-9">
                 <div class="row">
@@ -20,7 +26,7 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="single-item-body">
-                            <p class="single-item-title"><h2>{{$products->name}}</h2></p>
+                            <p class="single-item-title"><h2>{{substr($products->name,0,20)}}</h2></p>
                             <p class="single-item-price">
                                 <span>{{number_format($products->price, 0, ',', '.')}} đồng</span>
                             </p>
@@ -28,41 +34,50 @@
                                 @else Giày Nữ
                                 @endif</p>
                         </div>
+                        <div class="pull-left" style="margin-right: 100px;">
+                            <label>Kích cỡ: &nbsp;</label>
+                            @foreach ($size as $key)
+                                @foreach(SIZES as $sizeKey => $sizeName)
+                                    @if($key == $sizeKey ){{$sizeName}}&nbsp;
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        </div>
+
+                        <div class="pull-left">
+                            <label>Màu:&nbsp;</label>
+                            @foreach($color as $key => $value)
+                                @if(($value == "Đỏ")||($value == 5))
+                                    <a style="border: solid 1px black; background-color: red;" href="">&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                                @elseif(($value == "Đen")||($value == 0))
+                                    <a style="border: solid 1px black; background-color: black;" href="">&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                                @elseif(($value === "Trắng")||($value == 1))
+                                    <a style="border: solid 1px black; background-color: white;" href="">&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                                @elseif(($value === "Xanh")||($value == 2))
+                                    <a style="border: solid 1px black; background-color: blue;" href="">&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                                @elseif(($value === "Nâu")||($value == 3))
+                                    <a style="border: solid 1px black; background-color: brown;" href="">&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                                @elseif(($value === "Xám")||($value == 4))
+                                    <a style="border: solid 1px black; background-color: grey;" href="">&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                                @endif
+                            @endforeach
+                        </div>
                         <div class="clearfix"></div>
                         <div class="space20">&nbsp;</div>
                         <div class="single-item-desc">
                             <p>{{$products->content}}</p>
                         </div>
                         <div class="space20">&nbsp;</div>
-                        <p>Tuỳ chọn:</p>
-                        <div class="single-item-options">
-                            <select class="wc-select">
-                                <option>Kích cỡ</option>
-                                @foreach($size as $key => $value)
-                                    <option>{{$value}}</option>
-                                @endforeach
-                            </select>
-                            <select class="wc-select" name="ProductColor" >
-                                <option>Màu</option>
-                                @foreach($color as $key => $value)
-                                    <option>{{$value}}</option>
-                                @endforeach
-                            </select>
-                            <select class="wc-select" name="ProductQuantity">
-                                <option>Số lượng</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <a class="add-to-cart" onclick="alert('Thêm vào giỏ hàng thành công!')" href="#"><i class="fa fa-shopping-cart"></i></a>
-                            <div class="clearfix"></div>
+                        <div class="single-item-options" >
+                            <div class="single-item">
+
+                            <a class="add-to-cart" href="{!! url('add-cart',[$products->id,$products->alias]) !!}"><i class="fa fa-shopping-cart"></i></a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="space40">&nbsp;</div>
+                <div class="space100">&nbsp;</div>
                 <div class="woocommerce-tabs">
                     <ul class="tabs">
                         <li><a href="#tab-reviews">Reviews (0)</a></li>
@@ -88,8 +103,8 @@
                                     </p>
                                 </div>
                                 <div class="single-item-caption">
-                                    <a class="add-to-cart pull-left" onclick="alert('Thêm vào giỏ hàng thành công!')" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="beta-btn primary" href="{{route('details-product',$product->id)}}">Details <i class="fa fa-chevron-right"></i></a>
+                                    <a class="add-to-cart pull-left" href="{!! url('add-cart',[$product->id,$product->alias]) !!}">
+                                        <i class="fa fa-shopping-cart"></i></a>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -100,7 +115,7 @@
             </div>
             <div class="col-sm-3 aside">
                 <div class="widget">
-                    <h3 class="widget-title">Có thể bạn thích</h3>
+                    <h3 class="widget-title ;font-size: 200%">Có thể bạn thích</h3>
                     <div class="widget-body">
                         <div class="beta-sales beta-lists">
                             @foreach ($genderProducts as $product)

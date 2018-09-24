@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
+require app_path() . '\Const.php';
 class AppServiceProvider extends ServiceProvider
 {
     /**

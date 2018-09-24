@@ -24,17 +24,23 @@
     </div>
 </div>
 <!--slider-->
-@if(Session::has('order'))
-    <div class="alert alert-success">{{Session::get('order')}}</div>
-@endif
+
 <div class="container">
     <div id="content" class="space-top-none">
         <div class="main-content">
+            <div>
+                @if(Session::has('addcart'))
+                <div class="alert alert-success">{{Session::get('addcart')}}<div class="pull-right"><a href="{{route('cart')}}">Xem giỏ hàng</a></div></div>
+                @endif
+            </div>
             <div class="space60">&nbsp;</div>
+
             <div class="row">
+
+                </div>
                 <div class="col-sm-12">
-                    <div class="beta-products-list">
-                        <a href="{{route('view-product')}}"> <h4>Sản phẩm mới</h4></a>
+                    <div class="beta-products-list pull-left">
+                        <a href="{{route('view-product')}}"> <h4 style="font-size: 200%">Sản phẩm mới</h4></a>
                             <div class="clearfix"></div>
                         <div class="row">
                             <?php foreach ($products as $product): ?>
@@ -50,7 +56,8 @@
                                         </p>
                                     </div>
                                     <div class="single-item-caption">
-                                        <a class="add-to-cart pull-left" onclick="alert('Thêm vào giỏ hàng thành công!')" href=""><i class="fa fa-shopping-cart"></i></a>
+                                        <a class="add-to-cart pull-left" href="{!! url('add-cart',[$product->id,$product->alias]) !!}">
+                                            <i class="fa fa-shopping-cart"></i></a>
                                         <a class="beta-btn primary" href="{{route('details-product',$product->id)}}">Chi tiết <i class="fa fa-chevron-right"></i></a>
                                         <div class="clearfix"></div>
                                     </div>
@@ -61,7 +68,7 @@
                     </div> <!-- .beta-products-list -->
                     <div class="space50">&nbsp;</div>
                     <div class="beta-products-list">
-                        <h4>Được mua nhiều nhất</h4>
+                        <h4 style="font-size: 200%">Được mua nhiều nhất</h4>
                         <div class="beta-products-details">
                             <div class="clearfix"></div>
                         </div>
@@ -80,7 +87,8 @@
                                             </p>
                                     </div>
                                     <div class="single-item-caption">
-                                        <a class="add-to-cart pull-left" onclick="alert('Thêm vào giỏ hàng thành công!')" href=""><i class="fa fa-shopping-cart"></i></a>
+                                        <a class="add-to-cart pull-left" href="{!! url('add-cart',[$product->id,$product->alias]) !!}">
+                                            <i class="fa fa-shopping-cart"></i></a>
                                         <a class="beta-btn primary" href="{{route('details-product',$product->id)}}">Chi tiết <i class="fa fa-chevron-right"></i></a>
                                         <div class="clearfix"></div>
                                     </div>
